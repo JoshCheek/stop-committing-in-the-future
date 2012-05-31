@@ -34,12 +34,15 @@ but are people actually committing on machines that only have sh?)
 * Also the server is on Heroku, which has a notorious spin-up time. This will probably become
 a problem (either I'll introduce time in a block so that it can be lazily retrieved, or
 I'll just increase the time buffer)
-* Also I can't decide if the class in the binary should know about exit statuses. If it does,
+* I can't decide if the class in the binary should know about exit statuses. If it does,
 then I can return 1 or 0. But it's dumb that the class doing all the time math is the one
 that knows about exit statuses.
-* Also it uses RestClient, but its shitty to make users deal with gems. Maybe I'll brave
+* It uses RestClient, but its shitty to make users deal with gems. Maybe I'll brave
 the sulfur laden wasteland of net/http, but did you see the part where I said `RestClient.get url`?
 that's just so damn sexy, why torture myself?
+* It uses WEBrick (because it's in the stdlib), which spams the tests. I'm sure there's a
+way silence it, but didn't see anything and didn't think it was worth continuing to look.
+If anyone knows, clue me in.
 
 
 What's the license?
