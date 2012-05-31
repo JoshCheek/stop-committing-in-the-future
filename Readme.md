@@ -19,6 +19,16 @@ Still working on that (Probably just copy it into your .git/hooks dir and make i
 Oh, and you'll need to make sure you `$ gem install rest-client` \*sigh\*
 
 
+Where is the server?
+--------------------
+
+[what-time-is-it.heroku.com](http://what-time-is-it.heroku.com/)
+
+So I totally looked at like ten sites to try to get this data. Thought I had it for a bit
+with [this](tycho.usno.navy.mil/cgi-bin/timer.pl) one, but it has no year. In the end,
+making my own was simple and fun. For some definitions of those words.
+
+
 What sucks about it?
 --------------------
 
