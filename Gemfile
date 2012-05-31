@@ -1,5 +1,6 @@
 source :rubygems
 
+gem 'rake'
 gem 'rest-client', '~> 1.6.7'
 
 # why do I use groups? I never do group requires -.^
