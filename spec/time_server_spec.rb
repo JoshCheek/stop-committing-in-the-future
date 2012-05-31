@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe TimeServer do
-  describe '#inspect' do
+describe "TimeServer" do
+  describe '.inspect' do
     it "returns 'TimeServer' so it's not so friggin confusing" do
-      subject.inspect.should == 'TimeServer'
+      TimeServer.inspect.should == 'TimeServer'
     end
   end
 
-  describe '#call' do
+  describe '.call' do
     it 'returns 200 OK' do
       TimeServer.call({})[0].should == 200
     end
@@ -21,7 +21,7 @@ describe TimeServer do
     end
   end
 
-  describe '#time' do
+  describe '.time' do
     it 'returns the current time in UTC' do
       TimeServer.time.should == now
     end
