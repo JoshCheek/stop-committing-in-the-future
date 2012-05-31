@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+require 'time'
+require 'rubygems'
+require 'rest_client' # if you don't have it: $ gem install rest_client
+
+
+class TimeChecker < Struct.new(:local_time, :url)
+  def remote_date
+    @remote_date ||= Time.parse RestClient.get url
+  end
+
+  def error_message
+    return if close_enough?
+    "INCORRECT LOCAL DATE\nLOCAL:  #{local_time}\nREMOTE: #{remote_date}"
+  end
+
+  def close_enough?
+    difference_in_seconds <= 1.0
+  end
+
+  def difference_in_seconds
+    (local_time - remote_date).abs
+  end
+end
+
+
+# run the script if executed as binary
+if $0 == __FILE__
+  message = TimeChecker.new(Time.now.utc, "http://0.0.0.0:9292").error_message
+  if message
+    $stderr.puts message
+    exit 1
+  end
+end
