@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe TimeServer do
+  describe '#inspect' do
+    it "returns 'TimeServer' so it's not so friggin confusing" do
+      subject.inspect.should == 'TimeServer'
+    end
+  end
+
   describe '#call' do
     it 'returns 200 OK' do
       TimeServer.call({})[0].should == 200
