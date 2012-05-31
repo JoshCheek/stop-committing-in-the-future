@@ -27,7 +27,7 @@ end
 
 # run the script if executed as binary
 if $0 == __FILE__
-  message = TimeChecker.new(Time.now.utc, "http://0.0.0.0:9292").error_message
+  message = TimeChecker.new(Time.now.utc, "http://what-time-is-it.heroku.com/").error_message
   if message
     $stderr.puts message
     exit 1
