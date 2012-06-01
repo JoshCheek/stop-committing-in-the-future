@@ -1,8 +1,10 @@
 require 'time_server'
 load File.expand_path '../../bin/pre-commit', __FILE__
 
-require 'timecop'
 require 'rack'
+require 'timecop'
+require 'webrick'
+require 'stringio'
 
 
 module Freezetime
@@ -46,7 +48,9 @@ module ManageServer
   end
 
   def start_server
-    @server_thread = Thread.new { Rack::Server.start app: TimeServer, Port: port, server: 'webrick' }
+    @server_thread = Thread.new do
+      Rack::Server.start app: TimeServer, Port: port, server: 'webrick', AccessLog: [] , Logger: WEBrick::Log.new(StringIO.new)
+    end
     sleep 2
   end
 
