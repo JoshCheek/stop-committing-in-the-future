@@ -1,18 +1,23 @@
 #!/usr/bin/env ruby
 
+require 'uri'
 require 'time'
-require 'rubygems'
-require 'rest_client' # if you don't have it: $ gem install rest_client
+require 'net/http'
 
 
 class TimeChecker < Struct.new(:local_time, :url)
-  def remote_date
-    @remote_date ||= Time.parse RestClient.get url
+  def remote_time
+    @remote_time ||= Time.parse raw_remote_time
+  end
+
+  def raw_remote_time
+    uri = URI.parse url
+    Net::HTTP.new(uri.host, uri.port).request(Net::HTTP::Get.new uri.path).body
   end
 
   def error_message
     return if close_enough?
-    "INCORRECT LOCAL DATE\nLOCAL:  #{local_time}\nREMOTE: #{remote_date}"
+    "INCORRECT LOCAL DATE\nLOCAL:  #{local_time}\nREMOTE: #{remote_time}"
   end
 
   def close_enough?
@@ -20,7 +25,7 @@ class TimeChecker < Struct.new(:local_time, :url)
   end
 
   def difference_in_seconds
-    (local_time - remote_date).abs
+    (local_time - remote_time).abs
   end
 end
 
