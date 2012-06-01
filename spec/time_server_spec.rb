@@ -25,11 +25,5 @@ describe "TimeServer" do
     it 'returns the current time in UTC' do
       TimeServer.time.should == now
     end
-
-    it 'can be overridden for one call' do
-      TimeServer.next_call_returns one_second_ago
-      TimeServer.time.should == one_second_ago
-      TimeServer.time.should == now
-    end
   end
 end

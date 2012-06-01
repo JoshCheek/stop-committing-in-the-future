@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe TimeChecker, '#error_message' do
-  
+
   before(:all) { start_server }
   after(:all)  { stop_server }
-  
+
   let(:checker) { described_class.new now, url }
 
   def server_returns(return_time)
-    TimeServer.next_call_returns return_time
+    TimeServer.stub time: return_time
   end
 
 
