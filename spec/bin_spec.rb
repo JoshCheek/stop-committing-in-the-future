@@ -5,7 +5,7 @@ describe TimeChecker, '#error_message' do
   before(:all) { start_server }
   after(:all)  { stop_server }
 
-  let(:checker) { described_class.new now, url }
+  let(:checker) { described_class.new Time.method(:now), url }
 
   def server_returns(return_time)
     TimeServer.stub time: return_time

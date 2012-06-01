@@ -5,7 +5,7 @@ require 'time'
 require 'net/http'
 
 
-class TimeChecker < Struct.new(:local_time, :url)
+class TimeChecker < Struct.new(:local_time_method, :url)
   def remote_time
     @remote_time ||= Time.parse raw_remote_time
   end
@@ -27,12 +27,16 @@ class TimeChecker < Struct.new(:local_time, :url)
   def difference_in_seconds
     (local_time - remote_time).abs
   end
+
+  def local_time
+    @local_time ||= local_time_method.call.utc
+  end
 end
 
 
 # run the script if executed as binary
 if $0 == __FILE__
-  message = TimeChecker.new(Time.now.utc, "http://what-time-is-it.heroku.com/").error_message
+  message = TimeChecker.new(Time.method(:now), "http://what-time-is-it.heroku.com/").error_message
   if message
     $stderr.puts message
     exit 1
