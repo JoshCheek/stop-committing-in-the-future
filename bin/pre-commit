@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+# I live online at https://github.com/JoshCheek/stop-committing-in-the-future
+
 require 'uri'
 require 'time'
 require 'net/http'
